@@ -38,7 +38,7 @@
       <header>
          <div class="header-top wow fadeIn">
             <div class="container">
-               <a class="navbar-brand" href="index.html">katsome</a>
+               <a class="navbar-brand" href="index.html"> <span style="color:#157fda ; font-size: 22px; font-family: cursive;">K</span>atsome <span style="color:#157fda ; font-size: 22px;">Clinic</span><br> And <span style="color:#157fda ; ">Pharmancy</span></a>
                <div class="right-header">
                   <div class="header-info">
                      <div class="info-inner">
@@ -143,10 +143,12 @@
       <!-- end of about section -->
 
 <!-- services -->
-<div >
-<div class="heading" id="services">
+<div id="services">
+<div class="container">
+   <div class="heading">
    <h2>The Specialist services</h2>
 </div>
+
 <div class="row">
    <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="service-widget">
@@ -213,6 +215,7 @@
             text-align: center;">So far i dont have content</p>
       </div>
    </div>
+</div>
 </div>
 </div>
 	<!-- end of service section --> 
@@ -379,7 +382,7 @@
 
                   <div class="col-md-6 col-sm-6">
                        <!-- CONTACT FORM HERE -->
-                       <form id="appointment-form" role="form" method="post" action="#">
+                       <form  id="frmContact" role="form" method="post" action="#">
 
                             <!-- SECTION TITLE -->
                             <!-- <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
@@ -402,12 +405,12 @@
 
                                  <div class="col-md-6 col-sm-6">
                                       <label for="date">Select Date</label>
-                                      <input type="date" name="date" value="" class="form-control">
+                                      <input type="date" name="date" id="date" value="" class="form-control">
                                  </div>
 
                                  <div class="col-md-6 col-sm-6">
                                       <label for="select">Select Department</label>
-                                      <select class="form-control">
+                                      <select class="form-control" id="department">
                                            <option>General Health</option>
                                            <option>Pharmancy</option>
                                            <option>Surgery</option>
@@ -424,7 +427,7 @@
                                       <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
                                       <label for="Message">Additional Message</label>
                                       <textarea class="form-control" rows="5" id="message" name="message" placeholder="Message" style="margin-bottom:10px ;"></textarea>
-                                      <button type="submit" class="form-control" id="cf-submit" name="submit" style="margin-bottom:10px ;">Submit Button</button>
+                                      <button type="submit" class="form-control" id="submit" name="submit" style="margin-bottom:10px ;">Submit Button</button>
                                  </div>
                             </div>
                       </form>
@@ -503,7 +506,7 @@
                        <div class="col-md-12 col-sm-12 border-top">
                             <div class="col-md-4 col-sm-6">
                                  <div class="copyright-text"> 
-                                      <p>Copyright &copy; 2022 katsome 
+                                      <p>Copyright &copy; 2022 katsome clinic and pharmancy
                                       
                                       | Design: gladys</p>
                                  </div>
@@ -529,6 +532,45 @@
       <!-- all plugins -->
       <script src="js/custom.js"></script>
       <!-- map -->
+
+     
+<script type="module">
+   // Import the functions you need from the SDKs you need
+   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
+   import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+    
+   // Paste the code from Firebase
+   const firebaseConfig = {
+    apiKey: "AIzaSyB2a0Ir642aTG43IHoMpiVfKSve3AEU3mM",
+    authDomain: "katsome-clinic-and-pharmancy.firebaseapp.com",
+    databaseURL: "https://katsome-clinic-and-pharmancy-default-rtdb.firebaseio.com",
+    projectId: "katsome-clinic-and-pharmancy",
+    storageBucket: "katsome-clinic-and-pharmancy.appspot.com",
+    messagingSenderId: "808946408066",
+    appId: "1:808946408066:web:80740017833b9834a8729b"
+  };
+    
+   // Initialize Firebase
+   const app = initializeApp(firebaseConfig);
+    
+   // Get a reference to the database service
+   const db = getDatabase(app);
+    
+   document.getElementById('frmContact').addEventListener('submit', function(e) {
+       e.preventDefault();
+       set(ref(db, 'users/' + Math.random().toString(36).slice(2, 7)), {
+           name: document.getElementById('name').value,
+           email: document.getElementById('email').value,
+           date: document.getElementById('date').value,
+           department: document.getElementById('department').value,
+           phone: document.getElementById('phone').value,
+           message: document.getElementById('message').value
+       });
+    
+       alert('Your form is submitted');
+       document.getElementById('frmContact').reset();
+   });
+   </script>
      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNUPWkb4Cjd7Wxo-T4uoUldFjoiUA1fJc&callback=myMap"></script> -->
    </body>
 </html>
